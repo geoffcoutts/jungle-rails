@@ -10,6 +10,15 @@ Rails.application.routes.draw do
     delete :remove_item
   end
 
+  resource :session,
+    only: [:new, :create, :destroy],
+    path_names: { new: 'login', create: 'login' }
+
+  resources :users,
+    only: [:new, :create],
+    path_names: { new: 'register' }
+
+
   resources :orders, only: [:create, :show]
 
   namespace :admin do
