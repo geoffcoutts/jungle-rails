@@ -1,0 +1,24 @@
+
+<% if line_item = LineItem.find_by(id: line_item_id) %>
+<% product = line_item.product %>
+
+    <tr>
+      <td>
+        <%= image_tag product.image.tiny %>
+      </td>
+      <td>
+        <h4><%= product.name %></h4>
+        <br>
+        <p><%= product.description %></p>
+      </td>
+      <td>
+        <%= product.price %>
+      </td>
+      <td>
+        <%= line_item.quantity %>
+      </td>
+      <td>
+        <%= product.price * line_item.quantity %>
+      </td>
+    </tr>
+<% end %>
