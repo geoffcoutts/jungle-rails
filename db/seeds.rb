@@ -132,5 +132,35 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+## USERS
+
+puts "Creating users!"
+
+User.destroy_all
+
+12.times do | user |
+  name = Faker::HarryPotter.unique.character.split(" ")
+  User.create!({
+    first_name: name[0],
+    last_name: name[1],
+    email: "#{name[0]}@#{name[1]}.com",
+    password: "1234",
+    password_confirmation: "1234"
+    })
+end
+
+## Reviews
+puts "Creating reviews!"
+
+Review.destroy_all
+
+100.times do | review |
+  Review.create!({
+    product_id: Product.all.sample.id,
+    user_id: User.all.sample.id,
+    description: Faker::HarryPotter.quote,
+    rating: rand(5)
+    })
+end
 
 puts "DONE!"
