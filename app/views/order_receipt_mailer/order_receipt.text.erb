@@ -1,0 +1,18 @@
+You have successfully placed an order at Jungle!
+
+Your order is as follows:
+
+*************************
+
+<% @order.line_items.each do | line_item | %>
+
+  <%= line_item.product.name %>
+  <%= line_item.product.description %>
+  <%= line_item.product.price %>
+  <%= line_item.quantity %>
+  <%= line_item.product.price * line_item.quantity %>
+<% end %>
+
+<%= number_to_currency(order.total_cents * 0.01) %>
+
+Thanks for shopping and have a great day!
