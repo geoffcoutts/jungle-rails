@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
 
   def show
-    @order = Order.includes(:line_items).includes(:products).find(params[:id])
+    @order = find_order(params[:id])
+    # Order.includes(:line_items).includes(:products).find(params[:id])
   end
 
   def create
@@ -54,6 +55,8 @@ class OrdersController < ApplicationController
     end
     order.save!
     order
+    @order = find_order(order.id)
+    send_order_receipt(@order)
   end
 
   # returns total in cents not dollars (stripe uses cents as well)
@@ -65,6 +68,25 @@ class OrdersController < ApplicationController
       end
     end
     total
+  end
+
+  def find_order(id)
+    Order.includes(:line_items).includes(:products).find(id)
+  end
+
+  def send_order_receipt(order)
+    respond_to do |format|
+      if order.save
+        # Tell the UserMailer to send a welcome email after save
+        OrderReceiptMailer.order_receipt(@order).deliver_later
+
+        format.html { redirect_to(@order, notice: 'Order was successfully created.') }
+        format.json { render json: @order, status: :created, location: @order }
+      else
+        # format.html { render action: 'new' }
+        # format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
 end
