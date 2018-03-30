@@ -25,6 +25,23 @@
         </dl>
       </div>
     </div>
+    <div class ="row">
+      <div class="col-sm-8">
+        <h3>Reviews</h3>
+        <h7>Total average rating: <%= @product.reviews.average(:rating).round(2) %>
+          <br>
+        <% @product.reviews.each do | review | %>
+          By: <%= review.user.first_name %> <%= review.user.last_name %>
+          <br>
+          Review:
+          <br>
+          <%= review.description  %>
+          <br>
+          Rating: <%= review.rating  %>
+          <br>
+        <% end %>
+      </div>
+    </div>
 
   </article>
 
