@@ -34,20 +34,28 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-12">
-      <%= form_tag orders_path do %>
-        <script
-          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-amount="<%= @cart_total * 100 %>"
-          data-name="Jungle"
-          data-description="<%= current_user.first_name %>'s Jungle Order"
-          data-locale="auto"
-          data-email="<%= current_user.email %>"
-          data-currency="cad">
-        </script>
-      <% end %>
-    </div>
+    <% if cart == {} %>
+      <div class="col-xs-12">
+        <%= link_to products_path, class: 'btn btn-primary' do %>
+          <%= fa_icon "shopping-cart", text: 'Add Items To Your Cart' %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="col-xs-12">
+        <%= form_tag orders_path do %>
+          <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-amount="<%= @cart_total * 100 %>"
+            data-name="Jungle"
+            data-description="<%= current_user.first_name %>'s Jungle Order"
+            data-locale="auto"
+            data-email="<%= current_user.email %>"
+            data-currency="cad">
+          </script>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 
 </section>
