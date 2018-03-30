@@ -11,7 +11,9 @@ class OrdersController < ApplicationController
 
     if order.valid?
       empty_cart!
-      redirect_to order, notice: 'Your Order has been placed.'
+      # redirect_to order, notice: 'Your Order has been placed.'
+      @order = find_order(order.id)
+      send_order_receipt(@order)
     else
       redirect_to cart_path, flash: { error: order.errors.full_messages.first }
     end
@@ -55,8 +57,6 @@ class OrdersController < ApplicationController
     end
     order.save!
     order
-    @order = find_order(order.id)
-    send_order_receipt(@order)
   end
 
   # returns total in cents not dollars (stripe uses cents as well)
@@ -81,7 +81,7 @@ class OrdersController < ApplicationController
         OrderReceiptMailer.order_receipt(@order).deliver_later
 
         format.html { redirect_to(@order, notice: 'Order was successfully created.') }
-        format.json { render json: @order, status: :created, location: @order }
+        # format.json { render json: @order, status: :created, location: @order }
       else
         # format.html { render action: 'new' }
         # format.json { render json: @user.errors, status: :unprocessable_entity }
