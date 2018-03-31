@@ -26,6 +26,18 @@
       </div>
     </div>
     <div class ="row">
+      <%= form_for :review, url: product_reviews_path(@product, @review) do | f | %>
+        <%= f.label :rating %>
+        <%= f.select :rating, options_for_select(1..5), { include_blank: true } %>
+        <br>
+        <%= f.label :description %>
+        <br>
+        <%= f.text_area :description %>
+        <br>
+        <%= f.submit 'Submit Review', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+    <div class ="row">
       <div class="col-sm-8">
         <h3>Reviews</h3>
         <h7>Total average rating: <%= @product.reviews.average(:rating).round(2) %>
