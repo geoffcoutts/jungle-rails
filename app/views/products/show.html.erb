@@ -25,6 +25,9 @@
           <dt>Price</dt>
           <dd><%= humanized_money_with_symbol @product.price %></dd>
         </dl>
+        <%= link_to add_item_cart_path(product_id: @product.id), class: 'btn btn-primary', method: :put do %>
+          <%= fa_icon "shopping-cart", text: 'Add' %>
+        <% end %>
       </div>
     </div>
     <!-- Show review submission form if user is logged in -->
