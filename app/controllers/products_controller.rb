@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find params[:id]
+    @product.reviews.sort {|x,y| y.created_at <=> x.created_at }
   end
 
 end

@@ -29,20 +29,20 @@
               <p><%= line_item.product.description %></p>
             </td>
             <td>
-              <%= line_item.product.price %>
+              <%= humanized_money_with_symbol line_item.product.price %>
             </td>
             <td>
               <%= line_item.quantity %>
             </td>
             <td>
-              <%= line_item.product.price * line_item.quantity %>
+              <%= humanized_money_with_symbol (line_item.product.price * line_item.quantity) %>
             </td>
           </tr>
         <% end %>
       </tbody>
       <tfoot>
         <th>
-          <%= number_to_currency(order.total_cents * 0.01) %>
+          <%= humanized_money_with_symbol (order.total_cents * 0.01) %>
         </th>
       </tfoot>
     </table>
