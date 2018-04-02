@@ -41,7 +41,7 @@ gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'pry'
   gem 'quiet_assets'
   gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.5'
@@ -55,6 +55,10 @@ group :development do
   gem 'spring'
 
   gem 'letter_opener'
+end
+
+group :test do
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :production do
