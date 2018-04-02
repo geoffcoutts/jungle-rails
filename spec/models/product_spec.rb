@@ -7,6 +7,5 @@ RSpec.describe Product, type: :model do
     it { is_expected.to validate_presence_of(:quantity) }
     it { is_expected.to validate_presence_of(:category) }
 
-    binding.pry
   end
 end
