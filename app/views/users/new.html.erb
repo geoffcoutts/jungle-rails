@@ -2,6 +2,16 @@
 
 <%= form_for :user, url: '/users' do |f| %>
 
+  <% if @user %>
+    <% if @user.errors.any? %>
+      <ul>
+      <% @users.errors.full_messages.each do |message| %>
+        <li> <%= message %> </li>
+        <% binding.pry %>
+      <% end %>
+      </ul>
+    <% end %>
+  <% end %>
   First Name: <%= f.text_field :first_name %>
   <br>
   Last Name: <%= f.text_field :last_name %>

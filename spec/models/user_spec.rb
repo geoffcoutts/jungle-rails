@@ -24,13 +24,6 @@ RSpec.describe User, type: :model do
          last_name: "coutts"
          )
       @user1.save
-      # @user2 = User.create(password: "12345678",
-      #    password_confirmation: "12345678",
-      #    email: "dfdaf@fdfas.com",
-      #    first_name: "geoff",
-      #    last_name: "coutts"
-      #    )
-      # @user2.save
     end
 
     describe '.authenticate_with_credentials' do
