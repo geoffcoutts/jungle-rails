@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   # end
 
   def self.authenticate_with_credentials(email, password)
+    email.gsub!(/\A\p{Space}*|\p{Space}*\z/, '')
+
     user = User.where('lower(email) = ?', email.downcase).first
     if user
       user.authenticate(password)
