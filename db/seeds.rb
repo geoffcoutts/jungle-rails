@@ -144,8 +144,8 @@ User.destroy_all
     first_name: name[0],
     last_name: name[1],
     email: "#{name[0]}@#{name[1]}.com",
-    password: "1234",
-    password_confirmation: "1234"
+    password: "12345678",
+    password_confirmation: "12345678"
     })
 end
 
