@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   # end
 
   def self.authenticate_with_credentials(email, password)
-    user = find_by email: email.downcase
+    user = User.where('lower(email) = ?', email.downcase).first
     if user
       user.authenticate(password)
     else

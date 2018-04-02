@@ -43,6 +43,9 @@ RSpec.describe User, type: :model do
       it 'should find user by email even with the wrong case' do
         expect(User.authenticate_with_credentials("G@C.com", "12345678")).to eql(@user1)
       end
+      it 'should find user by email even with spaces around it' do
+        expect(User.authenticate_with_credentials(" g@c.com ", "12345678")).to eql(@user1)
+      end
       it 'should fail to authenticate the password if it does not match the user' do
         expect(User.authenticate_with_credentials("g@c.com", "abcdefgh")).to eql(false)
       end
