@@ -30,51 +30,46 @@
         <% end %>
       </div>
     </div>
-    <!-- Show review submission form if user is logged in -->
     <div class ="row">
+      <!-- Show review submission form if user is logged in -->
       <div class="col-sm-6">
         <% if current_user %>
-          <h3>Make a Review</h3>
-          <%= form_for :review, url: product_reviews_path(@product, @review) do | f | %>
-            <%= f.label :rating %>
-            <%= f.select :rating, options_for_select(1..5), { include_blank: true } %>
+          <h2>Make a Review</h2>
+          <%= form_for :review, url: product_reviews_path(@product, @review) do | form | %>
+            <%= form.label :rating %>
+            <%= form.select :rating, options_for_select(1..5), { include_blank: true } %>
             <br>
-            <%= f.label :description %>
+            <%= form.label :description %>
             <br>
-            <%= f.text_area :description, style: 'width:100%; resize: none', rows: 10 %>
+            <%= form.text_area :description, style: 'width:100%; resize: none', rows: 5 %>
             <br>
-            <%= f.submit 'Submit Review', class: 'btn btn-primary' %>
+            <%= form.submit 'Submit Review', class: 'btn btn-primary' %>
           <% end %>
         <% end %>
       </div>
+      <!-- Show reviews if there are any, otherwise prompt user to submit a review -->
       <div class="col-sm-6">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <h3>Reviews</h3>
-            </tr>
-            <tr>
-              <th>Review By</th>
-              <th>Review</th>
-              <th>Rating</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @product.reviews.reverse.each do | review | %>
+        <% if @product.reviews.any? %>
+          <table class="table table-bordered">
+            <thead>
               <tr>
-                <td>
-                  <%= review.user.first_name %> <%= review.user.last_name %>
-                  <br>
-                  <% if current_user && current_user.id == review.user_id %>
-                    <%= link_to fa_icon('trash'), product_reviews_path(@product, :review_id => review), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
-                  <% end %>
-                </td>
-                <td><%= review.description %></td>
-                <td><%= review.rating %></td>
+                <h3>Reviews</h3>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+              <tr>
+                <th>Review By</th>
+                <th>Review</th>
+                <th>Rating</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @product.reviews.reverse.each do | review | %>
+                 <%= render 'review', review: review %>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <h2>Be the first to review!</h2>
+        <% end %>
       </div>
     </div>
   </article>

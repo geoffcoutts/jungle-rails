@@ -24,7 +24,7 @@ RSpec.feature "Visitor navigates to a product's details page by clicking on it f
 
     page.all('article.product').sample.find('header a img').click
 
-    expect(page).to have_css 'h3', text: 'Reviews'
+    expect(page).to have_css 'section.products-show'
 
     save_screenshot
   end
