@@ -17,11 +17,10 @@ RSpec.feature "UserLogins", type: :feature, js: true do
 
   before :each do
 
-    name = Faker::HarryPotter.unique.character.split(" ")
     @user = User.create!({
-      first_name: name[0],
-      last_name: name[1],
-      email: "#{name[0]}@#{name[1]}.com",
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      email: Faker::Internet.email,
       password: "12345678",
       password_confirmation: "12345678"
       })

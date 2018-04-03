@@ -7,7 +7,7 @@ class Product < ActiveRecord::Base
   has_many :reviews, :dependent => :destroy
 
   validates :name, presence: true
-  validates :price, presence: true
+  validates :price, numericality: { greater_than: 0 }
   validates :quantity, presence: true
   validates :category, presence: true
 
