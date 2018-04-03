@@ -11,4 +11,13 @@ class Product < ActiveRecord::Base
   validates :quantity, presence: true
   validates :category, presence: true
 
+  def average_review
+    average_review = reviews.average(:rating)
+    if average_review
+      average_review.round(2)
+    else
+      0
+    end
+  end
+
 end
