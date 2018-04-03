@@ -121,7 +121,7 @@ GEM
     newrelic_rpm (5.0.0.342)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
-    pg (1.0.0)
+    pg (0.21.0)
     poltergeist (1.17.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -253,7 +253,7 @@ DEPENDENCIES
   letter_opener
   money-rails
   newrelic_rpm
-  pg
+  pg (~> 0.18)
   poltergeist
   pry
   puma
