@@ -9,10 +9,10 @@ RSpec.feature "UserLogins", type: :feature, js: true do
 
     page.find('#navbar').find_link('Login').click
 
-    fill_in 'email', with: "#{@user.email}"
-    fill_in 'password', with: "#{@user.password}"
+    fill_in 'Email', with: "#{@user.email}"
+    fill_in 'Password', with: "#{@user.password}"
 
-    page.find('form').find_button('Submit').click
+    page.find('form').find_button('Login').click
   end
 
   before :each do

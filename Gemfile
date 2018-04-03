@@ -62,6 +62,8 @@ group :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'database_cleaner'
+  gem 'simplecov'
+  gem 'simplecov-console'
 end
 
 group :production do

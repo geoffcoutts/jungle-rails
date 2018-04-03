@@ -3,12 +3,11 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if user = User.authenticate_with_credentials(params[:email], params[:password])
+    if user = User.authenticate_with_credentials(params[:session][:email], params[:session][:password])
       session[:user_id] = user.id
       redirect_to '/'
     else
-      binding.pry
-      redirect_to '/session/login'
+      redirect_to new_session_path
     end
 
     # user = User.find_by_email(params[:email])
