@@ -2,6 +2,19 @@ require 'rails_helper'
 
 RSpec.feature "UserLogins", type: :feature, js: true do
 
+  def login
+    visit root_path
+
+    # save_screenshot
+
+    page.find('#navbar').find_link('Login').click
+
+    fill_in 'email', with: "#{@user.email}"
+    fill_in 'password', with: "#{@user.password}"
+
+    page.find('form').find_button('Submit').click
+  end
+
   before :each do
 
     name = Faker::HarryPotter.unique.character.split(" ")
@@ -16,16 +29,7 @@ RSpec.feature "UserLogins", type: :feature, js: true do
 
   scenario "User clicks on login, goes to login page, then submits email and password to login" do
 
-    visit root_path
-
-    # save_screenshot
-
-    page.find('#navbar').find_link('Login').click
-
-    fill_in 'email', with: "#{@user.email}"
-    fill_in 'password', with: "#{@user.password}"
-
-    page.find('form').find_button('Submit').click
+    login
 
     expect(page).to have_css 'div#navbar a', text: 'Logout'
 
@@ -34,16 +38,8 @@ RSpec.feature "UserLogins", type: :feature, js: true do
   end
 
   scenario "Logged in user clicks logout and it logs out of their account" do
-    visit root_path
 
-    # save_screenshot
-
-    page.find('#navbar').find_link('Login').click
-
-    fill_in 'email', with: "#{@user.email}"
-    fill_in 'password', with: "#{@user.password}"
-
-    page.find('form').find_button('Submit').click
+    login
 
     # save_screenshot
 
